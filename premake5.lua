@@ -20,6 +20,8 @@ workspace "cpu-pt"
     
     filter { }
 
+    includedirs { "src/", "ext/eigen/" }
+
 project "pt"
     kind "SharedLib"
     files "src/pt/**"
@@ -29,7 +31,6 @@ project "app"
     files "src/app/**"
 
     links "pt"
-    includedirs "./src/pt/"
 
 newaction {
     trigger = "clean",
@@ -44,6 +45,6 @@ newaction {
     trigger = "run",
     description = "compile a debug build and run",
     execute = function()
-        os.execute("premake5 gmake2 && cd makefiles && make && (../build/bin/debug/app; echo $?)")
+        os.execute("premake5 gmake2 && cd makefiles && make && (../build/bin/debug/app; echo App returned: $?)")
     end
 }

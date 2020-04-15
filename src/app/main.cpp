@@ -1,14 +1,15 @@
 #include <iostream>
 
-#include <pt/eigen.hpp>
+#include <pt/triangle.hpp>
 
 int main() {
-    using namespace PT::Math;
+    using namespace PT;
 
-    Vector a   = {1, 0, 0};
-    Matrix mat = AngleAxisMatrix(Vector::UnitZ(), PI_4);
+    Triangle tri = {{0, 1, 0}, {0, 0, 1}, {0, -1, 0}};
 
-    Vector rotated = mat * a;
+    double t          = 1.7e300;
+    bool   intersects = tri.IntersectRay({-1.5, 0, 0.2}, {1, 0, 0}, t);
 
-    std::cout << rotated << "\n";
+    std::cout << t << "\n";
+    std::cout << intersects;
 }

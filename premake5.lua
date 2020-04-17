@@ -20,7 +20,11 @@ workspace "cpu-pt"
     
     filter { }
 
-    includedirs { "src/", "ext/eigen/" }
+    includedirs { "src/", "ext/eigen/", "ext/lodepng/" }
+
+project "lodepng"
+    kind "SharedLib"
+    files "ext/lodepng/lodepng.cpp"
 
 project "pt"
     kind "SharedLib"
@@ -30,7 +34,7 @@ project "app"
     kind "ConsoleApp"
     files "src/app/**"
 
-    links "pt"
+    links { "pt", "lodepng" }
 
 newaction {
     trigger = "clean",

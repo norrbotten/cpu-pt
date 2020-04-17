@@ -1,15 +1,14 @@
 #include <iostream>
 
-#include <pt/triangle.hpp>
+#include <pt/objparse.hpp>
 
 int main() {
     using namespace PT;
 
-    Triangle tri = {{0, 1, 0}, {0, 0, 1}, {0, -1, 0}};
+    auto tris = ParseObj("./data/shuttle.obj");
 
-    double t          = 1.7e300;
-    bool   intersects = tri.IntersectRay({-1.5, 0, 0.2}, {1, 0, 0}, t);
-
-    std::cout << t << "\n";
-    std::cout << intersects;
+    if (tris.has_value()) {
+        for (auto& tri : tris.value()) {
+        }
+    }
 }

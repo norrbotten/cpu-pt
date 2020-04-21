@@ -7,6 +7,9 @@
 
 namespace PT {
 
+// TODO: maybe a specialization for small constexpr size films
+// but then again, how often do you have an image that fits on the stack
+
 /**
  * A film is basically a bitmap, but it keeps track of the number of samples
  * placed on each pixel and averages them when you get a pixel from it

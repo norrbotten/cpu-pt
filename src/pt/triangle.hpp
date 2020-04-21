@@ -59,7 +59,8 @@ struct Triangle {
             return false;
 
         double dist = f * edge2.dot(q);
-        if (dist > 1e-9 && dist < t) {
+
+        if (dist > 1e-9) {
             t = dist;
             return true;
         }

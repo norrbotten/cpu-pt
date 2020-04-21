@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include <fstream>
 #include <optional>
 #include <string>
@@ -81,10 +83,14 @@ std::optional<std::vector<Triangle>> ParseObj(const char* filename) {
 
             for (std::string segment; line_stream >> segment;) {
                 const auto first_slash = segment.find('/');
+
                 if (first_slash == std::string::npos) { // no slash found, this only has a pos index
                     vert_pos_indices.push_back(std::stoull(segment));
                 }
                 else if (segment.length() > first_slash) {
+                    // add vert pos index
+                    vert_pos_indices.push_back(std::stoull(segment.substr(0, first_slash)));
+
                     // search for a 2nd slash
                     const auto second_slash = segment.find('/', first_slash + 1);
 
@@ -103,7 +109,7 @@ std::optional<std::vector<Triangle>> ParseObj(const char* filename) {
                             return {};
 
                         const auto texcoord =
-                            segment.substr(first_slash + 1, (second_slash - 1) - (first_slash + 1));
+                            segment.substr(first_slash + 1, second_slash - first_slash - 1);
 
                         const auto normal = segment.substr(second_slash + 1);
 
@@ -202,6 +208,8 @@ std::optional<std::vector<Triangle>> ParseObj(const char* filename) {
             vert2.normal = Math::Vector(normal);
             vert3.normal = Math::Vector(normal);
         }
+
+        result.push_back(Triangle(std::move(vert1), std::move(vert2), std::move(vert3)));
     }
 
     return result;

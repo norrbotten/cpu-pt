@@ -49,6 +49,6 @@ newaction {
     trigger = "run",
     description = "compile a debug build and run",
     execute = function()
-        os.execute("premake5 gmake2 && cd makefiles && make && (cd .. && ./build/bin/debug/app; echo; echo App returned: $?)")
+        os.execute("premake5 gmake2 && cd makefiles && make config=release && (cd .. && echo ---; ./build/bin/release/app; echo App returned: $?)")
     end
 }

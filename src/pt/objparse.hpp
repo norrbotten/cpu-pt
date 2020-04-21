@@ -46,8 +46,8 @@ std::optional<std::vector<Triangle>> ParseObj(const char* filename) {
         if (first.compare("v") == 0) { // vertex pos
             double x, y, z, w = 1;
             line_stream >> x;
-            line_stream >> y;
             line_stream >> z;
+            line_stream >> y;
 
             if (!line_stream.eof()) // optional w scalar argument, defaults to 1
                 line_stream >> w;
@@ -66,8 +66,8 @@ std::optional<std::vector<Triangle>> ParseObj(const char* filename) {
         else if (first.compare("vn") == 0) { // vertex normal
             double x, y, z;
             line_stream >> x;
-            line_stream >> y;
             line_stream >> z;
+            line_stream >> y;
 
             auto normal = Math::Vector{x, y, z};
             normal.normalize(); // not guaranteed to be normalized
